@@ -82,8 +82,8 @@ Device-Security-Guidance-Configuration-Packs
 │   │       README.md
 │   │
 │   └───ChromeOS
-│           NCSC_Chrome_OS_configuration.csv
-│           NCSC_Chrome_OS_configurations.md
+│           NCSC_ChromeOS_2025_configuration.csv
+│           NCSC_ChromeOS_2025_configurations.md
 │           README.md
 │
 └───Microsoft
@@ -154,7 +154,7 @@ A manual version of the policies and settings are available within the repositor
 Follow the instructions on the Endpoint Manager pages for configurating [macOS](https://docs.microsoft.com/en-us/mem/intune/configuration/custom-settings-macos), [iOS](https://docs.microsoft.com/en-us/mem/intune/configuration/custom-settings-ios) and [Android](https://docs.microsoft.com/en-us/mem/intune/configuration/custom-settings-android-for-work) and apply the configurations in the corresponding file.
 
 #### ChromeOS
-Currently, it is not possible to manage ChromeOS using Microsoft Intune.
+Currently, it is not possible to manage ChromeOS using Microsoft Intune. ChromeOS devices can be added to Intune for inventory and basic commands such as Wipe, Deprovision, Lost Mode and Restart.
 
 ### Jamf Pro
 
