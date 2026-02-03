@@ -293,7 +293,10 @@ function Remove-ReadOnlyProperties {
     # Convert to hashtable for easier manipulation
     $hash = @{}
     $PolicyObject.PSObject.Properties | ForEach-Object {
-        if ($_.Name -notin $readOnlyProps) {
+        # Skip explicit read-only props, @odata.type annotations, and #microsoft.graph actions
+        if ($_.Name -notin $readOnlyProps -and
+            $_.Name -notlike '*@odata.type' -and
+            $_.Name -notlike '#microsoft.graph.*') {
             $hash[$_.Name] = $_.Value
         }
     }
@@ -630,9 +633,9 @@ function Main {
         }
     }
 
-    Write-Log ""
+    Write-Host ""
     Write-Log "Processing policy files..." -Level Info
-    Write-Log ""
+    Write-Host ""
 
     # Process each policy file
     foreach ($file in $policyFiles) {
@@ -701,7 +704,7 @@ function Main {
     }
 
     # Summary
-    Write-Log ""
+    Write-Host ""
     Write-Log "========================================" -Level Info
     Write-Log "Deployment Summary" -Level Info
     Write-Log "========================================" -Level Info
@@ -709,7 +712,7 @@ function Main {
     Write-Log "  Failed:     $($script:Stats.Failed)" -Level $(if ($script:Stats.Failed -gt 0) { "Error" } else { "Info" })
     Write-Log "  Skipped:    $($script:Stats.Skipped)" -Level $(if ($script:Stats.Skipped -gt 0) { "Warning" } else { "Info" })
     Write-Log "  Total:      $($policyFiles.Count)" -Level Info
-    Write-Log ""
+    Write-Host ""
     Write-Log "Log file: $LogPath" -Level Info
 
     if (-not $DryRun) {
